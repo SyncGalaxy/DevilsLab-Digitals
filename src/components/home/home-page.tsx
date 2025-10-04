@@ -6,19 +6,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
 import HeroBackground from './hero-background';
+import emailjs from "@emailjs/browser";
+import { Bot, Link2, Code, Briefcase, BarChart, BookOpen } from 'lucide-react';
 import ServicesBackground from './services-background';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Bot, Link2, Code, Briefcase, BarChart, BookOpen, Mail, Phone, MapPin, Loader2 } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import { useToast } from '@/hooks/use-toast';
-import { sendContactMessage, type SendContactMessageInput } from '@/ai/flows/send-email-flow';
+import { useToast } from "@/hooks/use-toast";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Loader2, Mail, Phone, MapPin } from "lucide-react";
+
 
 
 if (typeof window !== 'undefined') {
@@ -26,50 +27,50 @@ if (typeof window !== 'undefined') {
 }
 
 const HeroSection = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const [isClient, setIsClient] = useState(false);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
-  useEffect(() => {
-    if (isClient && titleRef.current) {
-        const titleText = titleRef.current.textContent || '';
-        titleRef.current.innerHTML = titleText.split('').map(char => 
-            char === ' ' ? ' ' : `<span class="char inline-block opacity-0 translate-y-12">${char}</span>`
-        ).join('');
-    
-        gsap.to('.hero-title .char', {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.05,
-            ease: 'power2.out',
-            delay: 0.5
-        });
+    useEffect(() => {
+        if (isClient && titleRef.current) {
+            const titleText = titleRef.current.textContent || '';
+            titleRef.current.innerHTML = titleText.split('').map(char =>
+                char === ' ' ? ' ' : `<span class="char inline-block opacity-0 translate-y-12">${char}</span>`
+            ).join('');
 
-        gsap.fromTo('.hero-subtitle', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 1.5, ease: 'power2.out' });
-        gsap.fromTo('.hero-cta', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 2, ease: 'power2.out' });
-    }
-  }, [isClient]);
+            gsap.to('.hero-title .char', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.05,
+                ease: 'power2.out',
+                delay: 0.5
+            });
 
-  return (
-    <section id="home" className="h-screen relative flex flex-col justify-center items-center text-center overflow-hidden bg-gradient-to-br from-white to-[#F8F9FA]">
-      {isClient && <HeroBackground />}
-      <div className="relative z-10 max-w-7xl px-8">
-        <h1 ref={titleRef} className="hero-title text-black/70 font-medium tracking-[0.05em] mb-6 text-[clamp(1.5rem,3vw,2.5rem)]">
-            ENGINEERING DIGITAL REALITIES
-        </h1>
-        <p className="hero-subtitle text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            DevilsLab pioneers AI solutions, Web3 innovation, business transformation, and cutting-edge research to shape the digital future.
-        </p>
-        <Button asChild size="lg" className="hero-cta rounded-full px-8 md:px-10 py-6 md:py-7 text-lg font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-            <Link href="/projects">Explore Our Work</Link>
-        </Button>
-      </div>
-    </section>
-  );
+            gsap.fromTo('.hero-subtitle', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 1.5, ease: 'power2.out' });
+            gsap.fromTo('.hero-cta', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 2, ease: 'power2.out' });
+        }
+    }, [isClient]);
+
+    return (
+        <section id="home" className="h-screen relative flex flex-col justify-center items-center text-center overflow-hidden bg-gradient-to-br from-white to-[#F8F9FA]">
+            {isClient && <HeroBackground />}
+            <div className="relative z-10 max-w-7xl px-8">
+                <h1 ref={titleRef} className="hero-title text-black/70 font-medium tracking-[0.05em] mb-6 text-[clamp(1.5rem,3vw,2.5rem)]">
+                    ENGINEERING DIGITAL REALITIES
+                </h1>
+                <p className="hero-subtitle text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+                    DevilsLab pioneers AI solutions, Web3 innovation, business transformation, and cutting-edge research to shape the digital future.
+                </p>
+                <Button asChild size="lg" className="hero-cta rounded-full px-8 md:px-10 py-6 md:py-7 text-lg font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <Link href="/projects">Explore Our Work</Link>
+                </Button>
+            </div>
+        </section>
+    );
 };
 
 const MarqueeSection = () => {
@@ -84,14 +85,14 @@ const MarqueeSection = () => {
         <div className="bg-primary py-6 md:py-8 overflow-hidden whitespace-nowrap border-y border-primary/20">
             <div className="marquee-content">
                 {Array(2).fill(0).map((_, i) => (
-                     <div key={i} className="inline-block">
+                    <div key={i} className="inline-block">
                         <span className="text-xl md:text-3xl font-bold mx-4 md:mx-8 text-white tracking-[0.1em]">AI INNOVATION</span>
                         <span className="text-xl md:text-3xl font-bold mx-4 md:mx-8 text-white tracking-[0.1em]">WEB3 DEVELOPMENT</span>
                         <span className="text-xl md:text-3xl font-bold mx-4 md:mx-8 text-white tracking-[0.1em]">BUSINESS SOLUTIONS</span>
                         <span className="text-xl md:text-3xl font-bold mx-4 md:mx-8 text-white tracking-[0.1em]">RESEARCH PAPERS</span>
                         <span className="text-xl md:text-3xl font-bold mx-4 md:mx-8 text-white tracking-[0.1em]">MARKETING STRATEGY</span>
                         <span className="text-xl md:text-3xl font-bold mx-4 md:mx-8 text-white tracking-[0.1em]">DIGITAL TRANSFORMATION</span>
-                     </div>
+                    </div>
                 ))}
             </div>
         </div>
@@ -178,58 +179,63 @@ const AboutSection = () => {
 };
 
 const FaqSection = () => {
-  const faqItems = [
-    {
-      question: "What types of projects does DevilsLab specialize in?",
-      answer: "DevilsLab specializes in engineering complex digital solutions. Our core areas include AI & Machine Learning, Web3 & Blockchain development, custom web platform creation (SaaS, marketplaces), and comprehensive digital transformation strategies for businesses of all sizes."
-    },
-    {
-      question: "How do we start a project with you?",
-      answer: "Starting a project is simple. It begins with an initial consultation where we discuss your idea and goals. Following that, we move to a proposal and planning phase. Once approved, our team proceeds with design, development, and regular check-ins before final deployment and support."
-    },
-    {
-      question: "Do you work with startups as well as established companies?",
-      answer: "Absolutely. We are passionate about innovation at every scale. We offer flexible engagement models tailored for early-stage startups to help them build MVPs and scale, as well as robust, enterprise-grade solutions for established corporations seeking digital transformation."
-    },
-    {
-      question: "What is SyncGalaxy and how does it relate to DevilsLab?",
-      answer: "SyncGalaxy is our flagship project, a global creator and startup growth hub. It represents our capability to build large-scale, community-driven platforms from the ground up and serves as a testament to our expertise in web platform development and ecosystem building."
-    },
-    {
-      question: "What is the typical timeline and cost for a project?",
-      answer: "Project timelines and costs vary significantly based on the scope, complexity, and technologies involved. After our initial consultation, we provide a detailed project proposal with a clear breakdown of deliverables, timelines, and pricing to ensure full transparency."
-    }
-  ];
+    const faqItems = [
+        {
+            question: "What types of projects does DevilsLab specialize in?",
+            answer: "DevilsLab specializes in engineering complex digital solutions. Our core areas include AI & Machine Learning, Web3 & Blockchain development, custom web platform creation (SaaS, marketplaces), and comprehensive digital transformation strategies for businesses of all sizes."
+        },
+        {
+            question: "How do we start a project with you?",
+            answer: "Starting a project is simple. It begins with an initial consultation where we discuss your idea and goals. Following that, we move to a proposal and planning phase. Once approved, our team proceeds with design, development, and regular check-ins before final deployment and support."
+        },
+        {
+            question: "Do you work with startups as well as established companies?",
+            answer: "Absolutely. We are passionate about innovation at every scale. We offer flexible engagement models tailored for early-stage startups to help them build MVPs and scale, as well as robust, enterprise-grade solutions for established corporations seeking digital transformation."
+        },
+        {
+            question: "What is SyncGalaxy and how does it relate to DevilsLab?",
+            answer: "SyncGalaxy is our flagship project, a global creator and startup growth hub. It represents our capability to build large-scale, community-driven platforms from the ground up and serves as a testament to our expertise in web platform development and ecosystem building."
+        },
+        {
+            question: "What is the typical timeline and cost for a project?",
+            answer: "Project timelines and costs vary significantly based on the scope, complexity, and technologies involved. After our initial consultation, we provide a detailed project proposal with a clear breakdown of deliverables, timelines, and pricing to ensure full transparency."
+        }
+    ];
 
-  return (
-    <section id="faq" className="py-20 md:py-28 px-4 md:px-8 bg-gray-50">
-      <h2 className="section-title">Frequently Asked Questions</h2>
-      <p className="section-subtitle">Have questions? We have answers. Find the most common inquiries below.</p>
-      <div className="max-w-4xl mx-auto">
-        <Accordion type="multiple" className="w-full">
-          {faqItems.map((item, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="bg-white border border-gray-200/80 rounded-2xl shadow-lg mb-4 px-4 md:px-6">
-              <AccordionTrigger
-                suppressHydrationWarning
-                className="text-base md:text-lg font-semibold text-left hover:no-underline text-primary">
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-base text-muted-foreground pt-2">
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-    </section>
-  );
+    return (
+        <section id="faq" className="py-20 md:py-28 px-4 md:px-8 bg-gray-50">
+            <h2 className="section-title">Frequently Asked Questions</h2>
+            <p className="section-subtitle">Have questions? We have answers. Find the most common inquiries below.</p>
+            <div className="max-w-4xl mx-auto">
+                <Accordion type="multiple" className="w-full">
+                    {faqItems.map((item, index) => (
+                        <AccordionItem key={index} value={`item-${index}`} className="bg-white border border-gray-200/80 rounded-2xl shadow-lg mb-4 px-4 md:px-6">
+                            <AccordionTrigger
+                                suppressHydrationWarning
+                                className="text-base md:text-lg font-semibold text-left hover:no-underline text-primary">
+                                {item.question}
+                            </AccordionTrigger>
+                            <AccordionContent className="text-base text-muted-foreground pt-2">
+                                {item.answer}
+                            </AccordionContent>
+                        </AccordionItem>
+                    ))}
+                </Accordion>
+            </div>
+        </section>
+    );
 };
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+    email: z.string().email({ message: "Please enter a valid email address." }),
+    message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
+
+const SERVICE_ID = "service_bjht4vw"; // process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const TEMPLATE_ID = "template_hpgufqh"; // process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+const PUBLIC_KEY = "TWhztNL7kcXN_SGPK"; // process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+const TO_EMAIL = "venkatjasawanth1315@gmail.com"; // optional
 
 const ContactSection = () => {
     const { toast } = useToast();
@@ -238,11 +244,7 @@ const ContactSection = () => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: "",
-            email: "",
-            message: "",
-        },
+        defaultValues: { name: "", email: "", message: "" },
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -250,22 +252,38 @@ const ContactSection = () => {
         setIsSuccess(false);
 
         try {
-            const result = await sendContactMessage(values);
+            // Ensure env vars exist (avoids silent failures)
+            if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+                throw new Error("EmailJS env vars are missing. Check .env.local");
+            }
 
-            if (result.success) {
+            // Match these keys with your EmailJS template variables
+            const templateParams = {
+                from_name: values.name,
+                reply_to: values.email,   // also sets reply-to header in EmailJS
+                message: values.message,
+                // Optional/contextual:
+                site_name: "DevilsLab",
+                page_url: window.location.href,
+                submitted_at: new Date().toLocaleString(),
+            };
+
+            const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+            if (result.status >= 200 && result.status < 300) {
                 form.reset();
                 setIsSuccess(true);
                 toast({
                     title: "Message Sent! ✔️",
-                    description: "Thanks for reaching out. We'll get back to you soon.",
+                    description: "Thanks for reaching out. We’ll reply to you soon.",
                 });
+                // reset success state after a bit
                 setTimeout(() => setIsSuccess(false), 4000);
             } else {
-                 throw new Error("Flow reported failure");
+                throw new Error(`EmailJS error: status ${result.status}`);
             }
-
         } catch (error) {
-            console.error('Error submitting form:', error);
+            console.error("EmailJS send failed:", error);
             toast({
                 variant: "destructive",
                 title: "Uh oh! Something went wrong.",
@@ -275,14 +293,17 @@ const ContactSection = () => {
             setIsSubmitting(false);
         }
     }
-    
+
     return (
         <section id="contact" className="py-20 md:py-28 px-4 md:px-8 bg-gray-50">
             <h2 className="section-title">Get In Touch</h2>
             <p className="section-subtitle">Have an idea? Let's build the future together.</p>
+
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-8 md:gap-16 bg-white p-6 md:p-12 rounded-2xl shadow-2xl border border-gray-200/80">
+                {/* Left: form */}
                 <div className="contact-form">
                     <h3 className="text-2xl md:text-3xl font-bold mb-8 text-primary">Send Us a Message</h3>
+
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                             <FormField
@@ -297,7 +318,8 @@ const ContactSection = () => {
                                     </FormItem>
                                 )}
                             />
-                             <FormField
+
+                            <FormField
                                 control={form.control}
                                 name="email"
                                 render={({ field }) => (
@@ -309,7 +331,8 @@ const ContactSection = () => {
                                     </FormItem>
                                 )}
                             />
-                             <FormField
+
+                            <FormField
                                 control={form.control}
                                 name="message"
                                 render={({ field }) => (
@@ -321,12 +344,21 @@ const ContactSection = () => {
                                     </FormItem>
                                 )}
                             />
-                            <Button suppressHydrationWarning type="submit" size="lg" disabled={isSubmitting || isSuccess} className="w-full rounded-full py-7 text-lg font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-                                {isSubmitting ? <Loader2 className="animate-spin" /> : isSuccess ? 'Message Sent! ✔️' : 'Send Message'}
+
+                            <Button
+                                suppressHydrationWarning
+                                type="submit"
+                                size="lg"
+                                disabled={isSubmitting || isSuccess}
+                                className="w-full rounded-full py-7 text-lg font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
+                            >
+                                {isSubmitting ? <Loader2 className="animate-spin" /> : isSuccess ? "Message Sent! ✔️" : "Send Message"}
                             </Button>
                         </form>
                     </Form>
                 </div>
+
+                {/* Right: contact info — unchanged */}
                 <div className="contact-info bg-primary text-white p-8 md:p-12 rounded-2xl flex flex-col justify-center">
                     <h3 className="text-2xl md:text-3xl font-bold mb-8">Contact Information</h3>
                     <div className="space-y-6 text-base md:text-lg">
@@ -356,14 +388,14 @@ export default function HomePage() {
         setIsClient(true);
     }, [isClient]);
 
-  return (
-    <>
-      <HeroSection />
-      {isClient && <MarqueeSection />}
-      <ServicesSection />
-      <AboutSection />
-      <FaqSection />
-      <ContactSection />
-    </>
-  );
+    return (
+        <>
+            <HeroSection />
+            {isClient && <MarqueeSection />}
+            <ServicesSection />
+            <AboutSection />
+            <FaqSection />
+            <ContactSection />
+        </>
+    );
 }
