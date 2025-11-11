@@ -1,5 +1,5 @@
-import ProcessPage from "@/components/process/process-page";
+import ProcessPageUltra from "@/components/process/process-page-ultra";
 
 export default function Process() {
-    return <ProcessPage />;
+    return <ProcessPageUltra />;
 }

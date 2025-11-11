@@ -1,5 +1,5 @@
-import DndxPage from "@/components/dndx/dndx-page";
+import DNDXPageUltra from "@/components/dndx/dndx-page-ultra";
 
 export default function DNDX() {
-    return <DndxPage />;
+    return <DNDXPageUltra />;
 }

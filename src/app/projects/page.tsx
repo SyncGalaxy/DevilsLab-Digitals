@@ -1,5 +1,5 @@
-import ProjectsPage from "@/components/projects/projects-page";
+import ProjectsPageUltra from "@/components/projects/projects-page-ultra";
 
 export default function Projects() {
-    return <ProjectsPage />;
+    return <ProjectsPageUltra />;
 }

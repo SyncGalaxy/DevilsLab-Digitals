@@ -1,5 +1,5 @@
-import ResearchPage from "@/components/research/research-page";
+import ResearchPageUltra from "@/components/research/research-page-ultra";
 
 export default function Research() {
-    return <ResearchPage />;
+    return <ResearchPageUltra />;
 }
