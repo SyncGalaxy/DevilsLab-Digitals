@@ -1,5 +1,5 @@
-import UltraHomePage from "@/components/home/home-page-ultra";
+import HomePagePrism from "@/components/home/home-page-prism";
 
 export default function Home() {
-  return <UltraHomePage />;
+  return <HomePagePrism />;
 }
