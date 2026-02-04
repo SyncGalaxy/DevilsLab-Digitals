@@ -3,15 +3,24 @@ import './globals.css';
 import ClientLayout from '@/components/client-layout';
 
 export const metadata: Metadata = {
-  title: "DevilsLab - Engineering Digital Realities",
+  title: "Lead Generation Services in Hyderabad | Get Quality Inquiries in 7-10 Days - DevilsLab",
   description:
-    "DevilsLab pioneers AI solutions, Web3 innovation, business transformation, and cutting-edge research to shape the digital future.",
+    "DevilsLab helps Hyderabad businesses get consistent, qualified leads through Google/Meta ads, landing pages & WhatsApp automation. Book your free lead strategy call today.",
+  keywords: "lead generation hyderabad, b2b lead generation, google ads hyderabad, facebook ads services, landing page optimization, whatsapp business automation, local marketing agency hyderabad",
   icons: {
     icon: [
       { url: "/images/icondsl.png", type: "image/png", sizes: "32x32" },
     ],
     shortcut: "/images/icondsl.png",
     apple: "/images/icondsl.png",
+  },
+  openGraph: {
+    title: "Lead Generation Services in Hyderabad | DevilsLab",
+    description: "Get 20-30 qualified leads monthly with our 30-Day Lead Surge System. Trusted by 50+ Hyderabad businesses.",
+    type: "website",
+    locale: "en_IN",
+    url: "https://devilslab.co.in",
+    siteName: "DevilsLab",
   },
 };
 

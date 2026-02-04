@@ -1,5 +1,5 @@
-import HomePagePrism from "@/components/home/home-page-prism";
+import HomePagePremium from "@/components/home/home-page-premium-v2";
 
 export default function Home() {
-  return <HomePagePrism />;
+  return <HomePagePremium />;
 }

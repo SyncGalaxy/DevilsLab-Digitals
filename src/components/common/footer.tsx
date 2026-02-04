@@ -34,29 +34,35 @@ export default function Footer() {
         <>
             <footer className="bg-white border-t-2 border-black/10 text-black pt-20 pb-8 px-8">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
                         <div className="lg:col-span-1">
                             <h4 className="text-black text-3xl font-black mb-6 tracking-tighter">
                                 DEVILSLAB
                             </h4>
                             <p className="text-base font-medium text-black/60 max-w-xs leading-relaxed">
-                                Engineering the impossible through code, creativity, and conviction.
+                                We build systems. One flagship system for growth (Surge), and custom systems for clients who need deeper engineering work.
                             </p>
                         </div>
 
                         <div>
+                            <h5 className="text-black font-black mb-6 text-sm tracking-widest uppercase">Services</h5>
+                            <FooterLink href="/#flagship">Surge System</FooterLink>
+                            <FooterLink href="/#services">SaaS Development</FooterLink>
+                            <FooterLink href="/#services">Web3 Development</FooterLink>
+                            <FooterLink href="/#services">R&D Services</FooterLink>
+                        </div>
+                        
+                        <div>
                             <h5 className="text-black font-black mb-6 text-sm tracking-widest uppercase">Product</h5>
-                            <FooterLink href="/#services">Services</FooterLink>
                             <FooterLink href="https://syncgalaxy.io/" target="_blank">SyncGalaxy</FooterLink>
-                            <FooterLink href="/projects">Projects</FooterLink>
                         </div>
                         
                         <div>
                             <h5 className="text-black font-black mb-6 text-sm tracking-widest uppercase">Company</h5>
-                            <FooterLink href="/#about">About</FooterLink>
-                            <FooterLink href="/research">Research</FooterLink>
-                            <FooterLink href="/forum">Forum</FooterLink>
-                            <FooterLink href="/process">Our Process</FooterLink>
+                            <FooterLink href="/#how-we-work">How We Work</FooterLink>
+                            <FooterLink href="/#faq">FAQ</FooterLink>
+                            <FooterLink href="/#contact">Contact</FooterLink>
+                            <FooterLink href="/dndx">Powered by DNDX</FooterLink>
                         </div>
 
                         <div>
@@ -71,7 +77,7 @@ export default function Footer() {
 
                     <div className="pt-8 border-t border-black/10 space-y-6">
                         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold text-black/60">
-                            <p className="mb-0">© {new Date().getFullYear()} DEVILSLAB • ALL RIGHTS RESERVED</p>
+                            <p className="mb-0">© {new Date().getFullYear()} DEVILSLAB DIGITALS PVT LTD • SYSTEM BUILDERS • HYDERABAD</p>
                             <div className="flex gap-8 items-center">
                                 <a 
                                     href="#" 
@@ -86,6 +92,13 @@ export default function Footer() {
                                     onClick={(e) => { e.preventDefault(); openModal('privacy'); }}
                                 >
                                     Privacy
+                                </a>
+                                <a 
+                                    href="#" 
+                                    className="text-black/60 hover:text-black transition-colors uppercase tracking-wider"
+                                    onClick={(e) => { e.preventDefault(); openModal('rnd'); }}
+                                >
+                                    R&D Policy
                                 </a>
                             </div>
                         </div>
