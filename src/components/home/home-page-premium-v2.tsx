@@ -5,10 +5,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import emailjs from "@emailjs/browser";
-import { ArrowRight, Mail, Phone, MapPin, Loader2 } from 'lucide-react';
+import { ArrowRight, Mail, Phone, MapPin, Loader2, MessageCircle } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import HeroBackground from "@/components/home/hero-cube-background";
+import { openWhatsApp } from '@/lib/utils';
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '';
@@ -1084,13 +1085,47 @@ const ContactSection = () => {
                                         </>
                                     ) : (
                                         <>
-                                            Book Strategy Call
+                                            Send Message
                                             <ArrowRight className="w-5 h-5" />
                                         </>
                                     )}
                                 </button>
                             </form>
                         </Form>
+
+                        <div className="text-center my-6">
+                            <div className="relative">
+                                <div className="absolute inset-0 flex items-center">
+                                    <div className="w-full border-t border-gray-200"></div>
+                                </div>
+                                <div className="relative flex justify-center text-sm">
+                                    <span className="px-4 bg-white text-gray-500">Or book instantly via</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            onClick={() => {
+                                const userMessage = form.getValues('message');
+                                if (!userMessage || userMessage.trim() === '') {
+                                    toast({
+                                        title: "Message required",
+                                        description: "Please enter a message before sending via WhatsApp.",
+                                        variant: "destructive"
+                                    });
+                                    return;
+                                }
+                                openWhatsApp({
+                                    mode: 'general',
+                                    message: userMessage
+                                });
+                            }}
+                            className="w-full px-8 py-5 bg-[#25D366] text-white text-base font-medium rounded-full hover:bg-[#25D366]/90 transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_10px_40px_rgba(37,211,102,0.3)]"
+                        >
+                            <MessageCircle className="w-5 h-5" />
+                            Send Message via WhatsApp
+                        </button>
 
                         <div className="text-center mt-6 text-sm text-gray-500">
                             Typical response time: Within 24 hours on business days

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
+import { openWhatsApp } from '@/lib/utils';
 
 interface Service {
     id: string;
@@ -82,13 +83,15 @@ export default function QuotationPage() {
             .map(s => s.name)
             .join(', ');
         
-        const message = `Selected Services: ${selected || 'None'}\nEstimated Total: ${formatPrice(total)}`;
+        const servicesList = selected || 'None selected yet';
         
-        const params = new URLSearchParams({
-            message: message
+        openWhatsApp({
+            mode: 'quotation',
+            service: servicesList,
+            budget: formatPrice(total),
+            message: 'I would like to discuss this quotation and get more details.',
+            source: 'Quotation Builder Page'
         });
-        
-        window.location.href = `/#contact?${params.toString()}`;
     };
 
     const groupedServices = {
@@ -279,10 +282,10 @@ export default function QuotationPage() {
                         {/* CTA */}
                         <button
                             onClick={handleRequestQuotation}
-                            className="flex items-center justify-center gap-2 w-full px-8 py-4 rounded-full bg-[#1e293b] text-white text-base font-medium hover:bg-[#1e293b]/90 transition-all duration-200"
+                            className="flex items-center justify-center gap-2 w-full px-8 py-4 rounded-full bg-[#25D366] text-white text-base font-medium hover:bg-[#25D366]/90 transition-all duration-200 shadow-lg"
                         >
-                            Request Detailed Quotation
-                            <ArrowRight className="w-5 h-5" />
+                            <MessageCircle className="w-5 h-5" />
+                            Request Quotation via WhatsApp
                         </button>
                     </div>
                 </div>
