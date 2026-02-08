@@ -4,16 +4,11 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import emailjs from "@emailjs/browser";
 import { ArrowRight, Mail, Phone, MapPin, Loader2, MessageCircle } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import HeroBackground from "@/components/home/hero-cube-background";
 import { openWhatsApp } from '@/lib/utils';
-
-const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
-const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '';
-const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
 
 // World-Class Hero with 3D Background
 const PremiumHero = () => {
@@ -970,27 +965,48 @@ const ContactSection = () => {
         setIsSubmitting(true);
 
         try {
-            await emailjs.send(
-                SERVICE_ID,
-                TEMPLATE_ID,
-                {
-                    from_name: values.name,
-                    from_email: values.email,
-                    message: values.message,
-                },
-                PUBLIC_KEY
-            );
+            // Submit to Google Sheets
+            const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
+            
+            if (!scriptUrl || scriptUrl === 'your_google_apps_script_url_here') {
+                throw new Error('Google Script URL not configured');
+            }
 
+            const response = await fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: values.name,
+                    email: values.email,
+                    message: values.message,
+                    source: 'Homepage - Contact Section',
+                    pageUrl: typeof window !== 'undefined' ? window.location.href : ''
+                })
+            });
+
+            // Note: no-cors mode doesn't allow reading response
+            // We assume success if no error is thrown
             toast({
                 title: "Message sent",
                 description: "We'll be in touch within 24 hours.",
             });
 
+            // Open WhatsApp with only the user's message
+            openWhatsApp({
+                mode: 'general',
+                message: values.message
+            });
+
             form.reset();
+            
         } catch (error) {
+            console.error('Contact form error:', error);
             toast({
                 title: "Failed to send",
-                description: "Please try again or email us directly.",
+                description: "Please try again or contact us via WhatsApp directly.",
                 variant: "destructive",
             });
         } finally {
@@ -1136,12 +1152,12 @@ const ContactSection = () => {
                             <div>
                                 <Mail className="w-6 h-6 text-gray-400 mb-3" />
                                 <div className="text-sm text-gray-500 mb-1">Email</div>
-                                <div className="text-gray-900 font-medium">hello@devilslab.co.in</div>
+                                <div className="text-gray-900 font-medium">social@devilslab.co.in</div>
                             </div>
                             <div>
                                 <MapPin className="w-6 h-6 text-gray-400 mb-3" />
                                 <div className="text-sm text-gray-500 mb-1">Location</div>
-                                <div className="text-gray-900 font-medium">Madhapur, Hyderabad</div>
+                                <div className="text-gray-900 font-medium">Dilsukh Nagar, Hyderabad</div>
                             </div>
                         </div>
                     </div>
