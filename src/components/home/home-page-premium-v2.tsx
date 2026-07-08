@@ -15,7 +15,7 @@ const PremiumHero = () => {
     const [isVisible, setIsVisible] = useState(false);
     const heroRef = useRef<HTMLDivElement>(null);
 
-    const bookingLink = "https://calendly.com/growth-devilslab/30min?month=2026-06";
+    const bookingLink = "https://calendly.com/growth-devilslab/30min";
 
     useEffect(() => {
         setIsVisible(true);
