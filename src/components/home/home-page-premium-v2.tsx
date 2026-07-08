@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -46,12 +47,12 @@ const PremiumHero = () => {
                                 >
                                     Book a 15-Minute Growth Audit
                                 </a>
-                                <a 
+                                <Link 
                                     href="/services"
                                     className="px-8 py-3.5 rounded-full border-2 border-gray-300 text-gray-700 text-base font-medium hover:border-gray-400 transition-all duration-200 inline-flex items-center justify-center"
                                 >
                                     View Services
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -88,12 +89,12 @@ const PremiumHero = () => {
                                 >
                                     Book a 15-Minute Growth Audit
                                 </a>
-                                <a 
+                                <Link 
                                     href="/services"
                                     className="px-8 py-3.5 rounded-full border-2 border-gray-300 text-gray-700 text-base font-medium hover:border-gray-400 transition-all duration-200 inline-flex items-center justify-center"
                                 >
                                     View Services
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -282,12 +283,12 @@ const FlagshipPackage = () => {
                                         Book a 15-Minute Growth Audit
                                     </a>
 
-                                    <a
+                                    <Link
                                         href="/contact"
                                         className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border-2 border-gray-300 text-gray-700 text-sm font-semibold hover:border-gray-400 transition-all duration-200"
                                     >
                                         Email DevilsLab
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -637,12 +638,12 @@ const PremiumServices = () => {
                                     <ArrowRight className="w-4 h-4" />
                                 </a>
 
-                                <a
+                                <Link
                                     href="/contact"
                                     className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border-2 border-gray-300 text-gray-700 text-sm font-semibold hover:border-gray-400 transition-all duration-200"
                                 >
                                     Contact Us
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -855,12 +856,12 @@ const HowWeWork = () => {
                                     <ArrowRight className="w-4 h-4" />
                                 </a>
 
-                                <a
+                                <Link
                                     href="/contact"
                                     className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border-2 border-gray-300 text-gray-700 text-sm font-semibold hover:border-gray-400 transition-all duration-200"
                                 >
                                     Contact Us
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -1071,12 +1072,12 @@ const FlagshipProductSection = () => {
                                     <ArrowRight className="w-4 h-4" />
                                 </a>
 
-                                <a
+                                <Link
                                     href="/contact"
                                     className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border-2 border-gray-300 text-gray-700 text-sm font-semibold hover:border-gray-400 transition-all duration-200"
                                 >
                                     Contact Us
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -1281,12 +1282,12 @@ const SelectedWorkSection = () => {
                                     <ArrowRight className="w-4 h-4" />
                                 </a>
 
-                                <a
+                                <Link
                                     href="/contact"
                                     className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border-2 border-gray-300 text-gray-700 text-sm font-semibold hover:border-gray-400 transition-all duration-200"
                                 >
                                     Contact Us
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -1508,12 +1509,12 @@ const FAQSection = () => {
                                     <ArrowRight className="w-4 h-4" />
                                 </a>
 
-                                <a
+                                <Link
                                     href="/contact"
                                     className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border-2 border-gray-300 text-gray-700 text-sm font-semibold hover:border-gray-400 transition-all duration-200"
                                 >
                                     Contact Us
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
